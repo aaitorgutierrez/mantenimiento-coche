@@ -1,0 +1,13 @@
+Modelo 3D del Peugeot 208 (assets/peugeot208.glb)
+
+Título:   Peugeot 208 2017
+Autor:    luizantonix
+Origen:   https://sketchfab.com/3d-models/peugeot-208-2017-b2ae9e143690430e9483f1190ae8ce6c
+Licencia: Creative Commons Atribución-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0)
+          https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+Cambios respecto al original: texturas reducidas a 1024 px y convertidas a WebP,
+mallas sin usar eliminadas; el modelo se escala, orienta y recoloca al cargarlo en la web.
+
+Uso: solo no comercial. Si compartes el modelo (o una versión modificada), debe mantener
+esta misma licencia y citar al autor.

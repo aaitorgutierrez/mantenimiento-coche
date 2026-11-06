@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Registros · Peugeot 208</title>
+<meta name="theme-color" content="#e9edf1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./" aria-label="Inicio">
+    <span class="num">208</span>
+    <span class="brand-txt"><strong>Peugeot 208 Style</strong><small>1.2 PureTech 82 CV · 2016</small></span>
+  </a>
+  <nav class="nav" aria-label="Principal">
+    <a href="./">Coche</a>
+    <a href="mantenimiento.html" aria-current="page">Registros</a>
+    <button type="button" id="btn-ajustes">Ajustes</button>
+  </nav>
+</header>
+
+<main class="wrap">
+  <h1>Registros de mantenimiento</h1>
+  <p class="sub" id="sub">Revisiones, cambios de piezas, reparaciones y notas. Se guardan en este navegador.</p>
+
+  <div class="cols">
+    <form class="form" id="form" autocomplete="off">
+      <h2 id="form-titulo">Nuevo registro</h2>
+      <div class="row2">
+        <label>Fecha <input type="date" id="f-fecha" required></label>
+        <label>Kilómetros <input type="number" id="f-km" inputmode="numeric" min="0" step="1" placeholder="p. ej. 84500"></label>
+      </div>
+      <label>Tipo
+        <select id="f-tipo"></select>
+      </label>
+      <label>Pieza o sistema
+        <select id="f-pieza"></select>
+      </label>
+      <label>Qué se hizo <input type="text" id="f-titulo" required maxlength="120" placeholder="p. ej. Cambio de pastillas delanteras"></label>
+      <div class="row2">
+        <label>Coste (€) <input type="number" id="f-coste" inputmode="decimal" min="0" step="0.01" placeholder="0,00"></label>
+        <label>Taller o dónde <input type="text" id="f-taller" maxlength="80" placeholder="Yo mismo, taller…"></label>
+      </div>
+      <label>Notas <textarea id="f-notas" placeholder="Marca y referencia de las piezas, pares usados, incidencias…"></textarea></label>
+      <div class="row2">
+        <label>Próximo aviso: km <input type="number" id="f-pkm" inputmode="numeric" min="0" step="1" placeholder="Opcional"></label>
+        <label>Próximo aviso: fecha <input type="date" id="f-pfecha"></label>
+      </div>
+      <div class="acciones">
+        <button class="btn" type="submit" id="f-guardar">Guardar registro</button>
+        <button class="btn sec" type="button" id="f-cancelar" hidden>Cancelar edición</button>
+      </div>
+    </form>
+
+    <section class="col" aria-labelledby="h-lista">
+      <div class="resumen" id="resumen"></div>
+      <div id="avisos-wrap" hidden>
+        <h2>Próximos avisos</h2>
+        <ul class="avisos" id="avisos"></ul>
+      </div>
+      <h2 id="h-lista">Historial</h2>
+      <div class="filtros">
+        <input type="text" id="q" placeholder="Buscar en los registros" aria-label="Buscar">
+        <select id="fl-tipo" aria-label="Filtrar por tipo"></select>
+        <select id="fl-pieza" aria-label="Filtrar por pieza"></select>
+      </div>
+      <ul class="linea" id="lista"></ul>
+    </section>
+  </div>
+
+  <div class="pie-datos">
+    <section class="ficha">
+      <h2>Ficha del coche</h2>
+      <div class="f"><label for="fi-modelo">Modelo</label><input type="text" id="fi-modelo"></div>
+      <div class="f"><label for="fi-anio">Año</label><input type="text" id="fi-anio"></div>
+      <div class="f"><label for="fi-motor">Motor</label><input type="text" id="fi-motor"></div>
+      <div class="f"><label for="fi-filtro">Filtro de aceite</label><input type="text" id="fi-filtro"></div>
+      <div class="f"><label for="fi-aceite">Aceite</label><input type="text" id="fi-aceite"></div>
+      <div class="f"><label for="fi-notas">Notas</label><input type="text" id="fi-notas" placeholder="Neumáticos, batería, código de radio…"></div>
+    </section>
+    <section>
+      <h2>Copia de seguridad</h2>
+      <p class="sub" style="margin-top:0">Los registros viven en este navegador. Descarga una copia de vez en cuando, y úsala para pasarlos a otro móvil u ordenador.</p>
+      <div class="btns">
+        <button class="btn sec" type="button" id="b-json">Descargar copia (JSON)</button>
+        <button class="btn sec" type="button" id="b-csv">Descargar Excel (CSV)</button>
+        <button class="btn sec" type="button" id="b-importar">Importar copia</button>
+        <input type="file" id="b-file" accept="application/json,.json" hidden>
+      </div>
+    </section>
+  </div>
+</main>
+
+<dialog id="dlg-ajustes">
+  <form method="dialog">
+    <h2>Ajustes</h2>
+    <label>Dirección del PDF del manual
+      <input id="aj-url" type="url" placeholder="https://…/manual.pdf">
+      <small>Opcional. Si la pones, cada referencia tendrá un botón «Abrir» que salta a la página. Si no, usa «Copiar» y busca esa página en tu PDF.</small>
+    </label>
+    <label>Color de la carrocería
+      <input id="aj-color" type="color" value="#9aa5b1">
+    </label>
+    <p class="credito">Modelo 3D «Peugeot 208 2017» de <a href="https://sketchfab.com/3d-models/peugeot-208-2017-b2ae9e143690430e9483f1190ae8ce6c" target="_blank" rel="noopener">luizantonix</a> (Sketchfab), licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Texturas reducidas y modelo adaptado a esta web.</p>
+    <menu>
+      <button id="aj-cerrar" class="btn sec">Cancelar</button>
+      <button id="aj-guardar" class="btn">Guardar ajustes</button>
+    </menu>
+  </form>
+</dialog>
+<script type="module" src="js/maint.js"></script>
+</body>
+</html>
